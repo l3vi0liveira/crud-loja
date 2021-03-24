@@ -1,11 +1,17 @@
 const models = require("../models");
 
-const dbUsuario = models.Usuario;
+const tabelaUsuario = models.Usuario;
 
 exports.listar = async (req, res) => {
-  return res.json({ mensagem: "Listar todos os usuários" });
+  const usuarios = await tabelaUsuario.findAll({
+    include: ["enderecos"],
+  });
+
+  return res.json(usuarios);
 };
 
 exports.criar = async (req, res) => {
-  return res.json({ mensagem: "Criar um novo usuário" });
+  const usuario = await tabelaUsuario.create(req.body);
+
+  return res.json(usuario);
 };
