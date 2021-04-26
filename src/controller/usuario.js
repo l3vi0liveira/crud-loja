@@ -3,9 +3,7 @@ const models = require("../models");
 const tabelaUsuario = models.Usuario;
 
 exports.listar = async (req, res) => {
-  const usuarios = await tabelaUsuario.findAll({
-    include: ["enderecos"],
-  });
+  const usuarios = await tabelaUsuario.findAll();
 
   return res.json(usuarios);
 };
