@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       nome: DataTypes.STRING,
-      login: DataTypes.STRING,
+      email: DataTypes.STRING,
       senha: DataTypes.STRING,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
@@ -18,7 +18,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Usuario.associate = (models) => {};
+  Usuario.associate = (models) => {
+    Usuario.hasMany(models.Endereco, {
+      foreignKey: 'usuarioId',
+      as: 'endereco'
+    })
+    Usuario.hasMany(models.Pedido, {
+      foreignKey: 'usuarioId',
+      as: 'pedido'
+    })
+  };
 
   return Usuario;
 };
