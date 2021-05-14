@@ -20,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
 
   Usuario.associate = (models) => {
     Usuario.hasMany(models.Endereco, {
-      foreignKey: 'usuarioId',
-      as: 'endereco'
-    })
+      foreignKey: "usuarioId",
+      as: "endereco",
+    });
     Usuario.hasMany(models.Pedido, {
-      foreignKey: 'usuarioId',
-      as: 'pedido'
-    })
+      foreignKey: "usuarioId",
+      as: "pedido",
+    });
   };
 
   return Usuario;

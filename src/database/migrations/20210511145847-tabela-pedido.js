@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,19 +12,19 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          key: 'id',
-          model: 'usuario'
-        }
+          key: "id",
+          model: "usuario",
+        },
       },
       produto: Sequelize.STRING,
-      valorTotal: Sequelize.DECIMAL(10,2),
+      valorTotal: Sequelize.DECIMAL(10, 2),
       estadoDoPedido: Sequelize.STRING,
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
-    })
+    });
   },
-  
+
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("pedido");
-  }
+  },
 };

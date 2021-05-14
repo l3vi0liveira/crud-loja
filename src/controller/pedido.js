@@ -23,11 +23,17 @@ exports.criar = async (req, res) => {
 };
 
 exports.deletar = async (req, res) => {
-  const recebeParametroDelete = req.params.id;
-  tabelaPedido.destroy({ where: { id: recebeParametroDelete } });
-  return res.json({
-    message: "Pedido: " + recebeParametroDelete + " deletado com sucesso",
+  const recebeParametroDeletar = req.params.id;
+  const buscar = await tabelaPedido.destroy({
+    where: { id: recebeParametroDeletar },
   });
+  if (!buscar) {
+    res.json({ message: "Por favor, digite um Id valido a ser deletado" });
+  } else {
+    return res.json({
+      message: "Pedido: " + buscar + " deletado com sucesso",
+    });
+  }
 };
 
 exports.alterar = async (req, res) => {
@@ -43,5 +49,21 @@ exports.alterar = async (req, res) => {
     { where: { id: recebeParametroAltera } }
   );
   const pedidos = await tabelaPedido.findByPk(recebeParametroAltera);
+  if (!pedidos) {
+    res.json({ message: "Por favor, digite um Id valido de pedido" });
+  }
   return res.json({ message: pedidos });
+};
+
+exports.validaPedido = async (req, res, next) => {
+  const { usuarioId, produto, valorTotal, estadoDoPedido } = req.body;
+  const procuraId = await tabelaUsuario.findByPk(usuarioId);
+  if (!procuraId) {
+    res.json({ message: "Por favor, cadastre um usuario valido" });
+  }
+  if (!usuarioId || !produto || !valorTotal || !estadoDoPedido) {
+    res.json({ message: "Por favor, digite todos os campos" });
+  } else {
+    next();
+  }
 };

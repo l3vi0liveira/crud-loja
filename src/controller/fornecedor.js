@@ -4,8 +4,9 @@ const tabelaFornecedor = models.Fornecedor;
 const tabelaProduto = models.tabelaProduto;
 
 exports.listar = async (req, res) => {
-  const fornecedores = await tabelaFornecedor.findAll(
-    { include: ["produtos"] });
+  const fornecedores = await tabelaFornecedor.findAll({
+    include: ["produtos"],
+  });
 
   return res.json(fornecedores);
 };
@@ -16,16 +17,20 @@ exports.criar = async (req, res) => {
 };
 
 exports.deletar = async (req, res) => {
-  const recebeParametroDelete = (req.params.id)
+  const recebeParametroDelete = req.params.id;
   tabelaFornecedor.destroy({ where: { id: recebeParametroDelete } });
-  return res.json({ message: "Fornecedor: " + recebeParametroDelete + " deletado com sucesso" })
-}
+  return res.json({
+    message: "Fornecedor: " + recebeParametroDelete + " deletado com sucesso",
+  });
+};
 
 exports.alterar = async (req, res) => {
-  const recebeParametroAltera = (req.params.id)
-  const { nome, cnpj } = req.body
-  await tabelaFornecedor.update({ nome: nome, cnpj: cnpj },
-    { where: { id: recebeParametroAltera } })
+  const recebeParametroAltera = req.params.id;
+  const { nome, cnpj } = req.body;
+  await tabelaFornecedor.update(
+    { nome: nome, cnpj: cnpj },
+    { where: { id: recebeParametroAltera } }
+  );
   const fornecedores = await tabelaFornecedor.findByPk(recebeParametroAltera);
-  return res.json({ message: fornecedores })
-}
+  return res.json({ message: fornecedores });
+};

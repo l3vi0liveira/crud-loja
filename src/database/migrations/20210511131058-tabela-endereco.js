@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,12 +12,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          key: 'id',
-          model: 'usuario'
-        }
+          key: "id",
+          model: "usuario",
+        },
       },
       rua: Sequelize.STRING,
-      numero: Sequelize.STRING,
+      numero: Sequelize.NUMERIC,
       complemento: Sequelize.STRING,
       bairro: Sequelize.STRING,
       cep: Sequelize.STRING,
@@ -30,5 +30,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("endereco");
-  }
+  },
 };

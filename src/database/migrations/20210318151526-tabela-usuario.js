@@ -14,7 +14,6 @@ module.exports = {
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });
-    
   },
 
   down: async (queryInterface, Sequelize) => {
