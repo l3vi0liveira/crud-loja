@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Usuario = sequelize.define(
-    "Usuario",
+  const Autor = sequelize.define(
+    "Autor",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -14,20 +14,11 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: DataTypes.DATE,
     },
     {
-      tableName: "usuario",
+      tableName: "autor",
     }
   );
 
-  Usuario.associate = (models) => {
-    Usuario.hasMany(models.Endereco, {
-      foreignKey: "usuarioId",
-      as: "endereco",
-    });
-    Usuario.hasMany(models.Pedido, {
-      foreignKey: "usuarioId",
-      as: "pedido",
-    });
-  };
+  Autor.associate = (models) => {};
 
-  return Usuario;
+  return Autor;
 };
